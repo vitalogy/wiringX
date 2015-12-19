@@ -23,6 +23,7 @@
 #include "wiringX.h"
 #include "hummingboard.h"
 #include "raspberrypi.h"
+#include "sunxidt.h"
 #include "bananapi.h"
 #include "radxa.h"
 #include "ci20.h"
@@ -102,7 +103,7 @@ void delayMicroseconds(unsigned int howLong) {
 #ifdef _WIN32
 		sleeper.tv_sec = wSecs;
 #else
-		sleeper.tv_sec = (__time_t)wSecs;	
+		sleeper.tv_sec = (__time_t)wSecs;
 #endif
 		sleeper.tv_nsec = (long)(uSecs * 1000L);
 		nanosleep(&sleeper, NULL);
@@ -668,7 +669,7 @@ int wiringXSupported(void) {
 }
 
 int wiringXSetup(void) {
-#ifndef _WIN32	
+#ifndef _WIN32
 	if(wiringXLog == NULL) {
 		wiringXLog = _fprintf;
 	}
@@ -678,6 +679,7 @@ int wiringXSetup(void) {
 			hummingboardInit();
 			raspberrypiInit();
 			bananapiInit();
+			sunxidtInit();
 			ci20Init();
 			radxaInit();
 

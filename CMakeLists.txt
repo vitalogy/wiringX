@@ -63,14 +63,14 @@ execute_process(COMMAND git describe --always
 	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 	RESULT_VARIABLE git_result
 	OUTPUT_VARIABLE git_ver)
-	
+
 # The printf is used to prevent bash naming errors e.g. libwiringx-107?-0963491.deb
 execute_process(COMMAND git log --oneline
 	COMMAND wc -l
 	COMMAND xargs printf %d
 	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 	RESULT_VARIABLE git_result
-	OUTPUT_VARIABLE git_commits)	
+	OUTPUT_VARIABLE git_commits)
 
 STRING(REGEX REPLACE "\n" "" git_ver "${git_ver}")
 add_definitions(-DHASH="${git_ver}")
