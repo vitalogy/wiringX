@@ -331,8 +331,8 @@ static int bananapiWaitForInterrupt(int pin, int ms) {
 	polls.events = POLLPRI;
 
 	(void)read(sysFds[pin], &c, 1);
-	lseek(sysFds[pin], 0, SEEK_SET);		
-	
+	lseek(sysFds[pin], 0, SEEK_SET);
+
 	x = poll(&polls, 1, ms);
 
 	/* Don't react to signals */
@@ -344,14 +344,30 @@ static int bananapiWaitForInterrupt(int pin, int ms) {
 }
 
 static int piBoardRev(void) {
-	FILE *cpuFd;
-	char line[120];
+	FILE *cpuFd = NULL;
+	FILE *versionFd = NULL;
+	char line[120], version[200];
 	char *d;
+	int majorVer=0, minorVer=0, patchVer=0;
 
 	memset(line, '\0', 120);
-	
+	memset(version, '\0', 200);
+
+	if((versionFd = fopen("/proc/version", "r")) == NULL) {
+		wiringXLog(LOG_ERR, "bananapi->identify: Unable to open /proc/version");
+		return -1;
+	}
+
+	fgets(version, 200, versionFd);
+	fclose(versionFd);
+
+	if(sscanf(version, "%*[^0-9]%d.%d.%d", &majorVer, &minorVer, &patchVer) < 3) {
+		wiringXLog(LOG_ERR, "bananapi->identify: Kernel version cannot be determined.");
+		return -1;
+	}
+
 	if((cpuFd = fopen("/proc/cpuinfo", "r")) == NULL) {
-		wiringXLog(LOG_ERR, "bananapi->identify: Unable open /proc/cpuinfo");
+		wiringXLog(LOG_ERR, "bananapi->identify: Unable to open /proc/cpuinfo");
 		return -1;
 	}
 
@@ -376,7 +392,12 @@ static int piBoardRev(void) {
 		*d = 0 ;
 
 	if(strstr(line, "sun7i") != NULL || strstr(line, "sun4i") != NULL) {
-		return 0;
+		if(majorVer == 3 && minorVer == 4) {
+			return 0;
+		} else {
+			wiringXLog(LOG_ERR, "bananapi->identify: Only kernel version 3.4.x is supported. Yours is %d.%d.%d.", majorVer, minorVer, patchVer);
+			return -1;
+		}
 	} else {
 		return -1;
 	}
