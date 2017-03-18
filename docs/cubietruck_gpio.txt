@@ -38,7 +38,7 @@
  |   14  |  47 |             PB15 (SPI2-CLK/JTAG_CK0) |11|12| PB17 (SPI2-MISO/JTAG_DI0)            |  49 |   15  |
  |       |  -  |                                  GND |13|14| GND                                  |  -  |       |
  |   16  | 276 | PI20 (FMIN-L/PS2SCLK0/UART7-TX/HSCL) |15|16| PI14 (PS2SCLK1/EINT26)               | 270 |   17  |
- |   18  | 277 |  PI21 (FMIN-R/PS2SDA0/UART7-RX/HSDA) |17|18| PB15 (PS2SDA1/EINT27)                | 271 |   19  |
+ |   18  | 277 |  PI21 (FMIN-R/PS2SDA0/UART7-RX/HSDA) |17|18| PI15 (PS2SDA1/EINT27)                | 271 |   19  |
  |   20  | 259 |                           PI3 (PWM1) |19|20| PB3 (IR0-TX)                         |  35 |   21  |
  |   22  |  34 |                           PB2 (PWM0) |21|22| PB4 (IR0-RX)                         |  36 |   23  |
  |   24  |  50 |                      PB18 (TWI1-SCK) |23|24| LINEIN-L                             |  -  |       |
