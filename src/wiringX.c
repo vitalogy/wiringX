@@ -39,6 +39,7 @@
 #include "platform/linksprite/pcduino1.h"
 #include "platform/lemaker/bananapi1.h"
 #include "platform/lemaker/bananapim2.h"
+#include "platform/cubietech/cubietruck.h"
 #include "platform/solidrun/hummingboard_gate_edge_sdl.h"
 #include "platform/solidrun/hummingboard_gate_edge_dq.h"
 #include "platform/solidrun/hummingboard_base_pro_sdl.h"
@@ -233,6 +234,7 @@ int wiringXSetup(const char *name, void (*func)(int, const char *, ...)) {
 	pcduino1Init();
 	bananapi1Init();
 	bananapiM2Init();
+	cubietruckInit();
 	hummingboardBaseProSDLInit();
 	hummingboardBaseProDQInit();
 	hummingboardGateEdgeSDLInit();

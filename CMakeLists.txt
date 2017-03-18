@@ -82,6 +82,8 @@ file(GLOB wiringX
 	"${PROJECT_SOURCE_DIR}/src/*.c"
 	"${PROJECT_SOURCE_DIR}/src/platform/*.c"
 	"${PROJECT_SOURCE_DIR}/src/platform/*.h"
+	"${PROJECT_SOURCE_DIR}/src/platform/cubietech/*.c"
+	"${PROJECT_SOURCE_DIR}/src/platform/cubietech/*.h"
 	"${PROJECT_SOURCE_DIR}/src/platform/linksprite/*.c"
 	"${PROJECT_SOURCE_DIR}/src/platform/linksprite/*.h"
 	"${PROJECT_SOURCE_DIR}/src/platform/lemaker/*.c"
